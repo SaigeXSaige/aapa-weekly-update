@@ -1,4 +1,8 @@
 import argparse
+import sys
+# Credit: https://stackoverflow.com/questions/67631/how-to-import-a-module-given-the-full-path
+sys.path.append('./scripts')
+
 from send_post import send_thread, send_init_post, send_reply_post, create_path
 
 class CommandLine:
@@ -6,21 +10,21 @@ class CommandLine:
         parser = argparse.ArgumentParser(description = "A script to post weekly AAPA Draft League results.")
         parser.add_argument(
             "-s", "--status_id", 
-            help = "ID of the status to reply to (i.e. 12345678910)", 
+            help = "Id of the status to reply to (i.e. 12345678910)", 
             required = False, default = "")
         parser.add_argument(
             "-i", "--img_paths", 
-            help = "List of paths to Desktop images separated by commas (i.e. /Desktop/rankings.png,)", 
+            help = "List of paths to images separated by commas (i.e. /Desktop/rankings.png,/Desktop/stats.png,...)", 
             required = False, default = ""
         )
-        parser.add_argument(
-            "-f", "--full_img_paths", 
-            help = "List of full paths to images separated by commas (i.e. /Users/<username>/Desktop/rankings.png,)", 
+        parser.add_argument( ## get rid of this?
+            "-f", "--full_img_paths",
+            help = "Only use if paths to images are out of scope of your HOME directory (i.e. /Users/<other_username>/Desktop/rankings.png,...)", 
             required = False, default = ""
         )
         parser.add_argument(
             "-a", "--auto_thread", action = "store_true",
-            help = "Posts entire thread using the full list of image paths", 
+            help = "Posts entire thread using the list of image paths", 
             required = False, default = ""
         )
 
