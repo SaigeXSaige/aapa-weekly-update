@@ -18,11 +18,11 @@ def get_user_ids(screen_names):
     return user_ids
 
 def dm_users_to_battle(add_optional_text=False):
-    players = input("Input users to battle: (i.e. tvnkth, chaucenosauce )\n")
-
-    for recipient_id in get_user_ids(players):
+    users = input("Input users to battle: (i.e. tvnkth, chaucenosauce )\n")
+    
+    for recipient_id in get_user_ids(users):
         optional_text = " (Don't forget to add the AAPA account to the chat..)" if add_optional_text else ""
         text = "Reminder to DM your opponent for this week's battle!" + optional_text
         message_create = {"target": {"recipient_id": recipient_id}, "message_data": {"text": text}}
-        print(message_create)
-        return twitter.send_direct_message(event={"type":'message_create', "message_create": message_create})
+        result = twitter.send_direct_message(event={"type":'message_create', "message_create": message_create})
+        print(result)
